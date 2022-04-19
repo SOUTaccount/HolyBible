@@ -8,7 +8,7 @@ abstract class Abstract {
     }
 
     interface Mapable<T, M : Mapper> {
-        fun map(mapper: M) : T
+        fun map(mapper: M): T
     }
 
     interface Mapper {
