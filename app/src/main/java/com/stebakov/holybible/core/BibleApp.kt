@@ -10,6 +10,8 @@ import com.stebakov.holybible.data.cache.BooksCacheMapper
 import com.stebakov.holybible.data.cache.RealmProvider
 import com.stebakov.holybible.data.net.BookCloudMapper
 import com.stebakov.holybible.data.net.BookService
+import com.stebakov.holybible.domain.BaseBooksDataToDomainMapper
+import com.stebakov.holybible.domain.BooksInteractor
 import retrofit2.Retrofit
 
 class BibleApp : Application() {
@@ -37,6 +39,7 @@ class BibleApp : Application() {
             booksCloudMapper,
             booksCacheMapper
         )
+        val booksInteractor = BooksInteractor.Base(booksRepository, BaseBooksDataToDomainMapper())
 
     }
 }
