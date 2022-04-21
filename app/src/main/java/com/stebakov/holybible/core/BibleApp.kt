@@ -12,6 +12,10 @@ import com.stebakov.holybible.data.net.BookCloudMapper
 import com.stebakov.holybible.data.net.BookService
 import com.stebakov.holybible.domain.BaseBooksDataToDomainMapper
 import com.stebakov.holybible.domain.BooksInteractor
+import com.stebakov.holybible.presentation.BaseBooksDomainToUiMapper
+import com.stebakov.holybible.presentation.BooksCommunication
+import com.stebakov.holybible.presentation.MainViewModel
+import com.stebakov.holybible.presentation.ResourceProvider
 import retrofit2.Retrofit
 
 class BibleApp : Application() {
@@ -19,6 +23,8 @@ class BibleApp : Application() {
     private companion object {
         const val BASE_URL = "https://bible-go-api.rkeplin.com/v1/"
     }
+
+    lateinit var mainViewModel: MainViewModel
 
     override fun onCreate() {
         super.onCreate()
@@ -40,6 +46,10 @@ class BibleApp : Application() {
             booksCacheMapper
         )
         val booksInteractor = BooksInteractor.Base(booksRepository, BaseBooksDataToDomainMapper())
-
+        mainViewModel = MainViewModel(
+            booksInteractor,
+            BaseBooksDomainToUiMapper(BooksCommunication.Base(), ResourceProvider.Base(this)),
+            BooksCommunication.Base()
+        )
     }
 }
