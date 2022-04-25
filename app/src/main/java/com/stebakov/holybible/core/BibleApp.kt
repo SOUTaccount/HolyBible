@@ -16,6 +16,7 @@ import com.stebakov.holybible.presentation.BaseBooksDomainToUiMapper
 import com.stebakov.holybible.presentation.BooksCommunication
 import com.stebakov.holybible.presentation.MainViewModel
 import com.stebakov.holybible.presentation.ResourceProvider
+import io.realm.Realm
 import retrofit2.Retrofit
 
 class BibleApp : Application() {
@@ -29,6 +30,7 @@ class BibleApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        Realm.init(this)
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .build()
@@ -46,10 +48,11 @@ class BibleApp : Application() {
             booksCacheMapper
         )
         val booksInteractor = BooksInteractor.Base(booksRepository, BaseBooksDataToDomainMapper())
+        val communication = BooksCommunication.Base()
         mainViewModel = MainViewModel(
             booksInteractor,
-            BaseBooksDomainToUiMapper(BooksCommunication.Base(), ResourceProvider.Base(this)),
-            BooksCommunication.Base()
+            BaseBooksDomainToUiMapper(communication, ResourceProvider.Base(this)),
+            communication
         )
     }
 }

@@ -5,7 +5,7 @@ import com.stebakov.holybible.data.BooksRepository
 
 interface BooksInteractor {
 
-    suspend fun fetchBooks(): BookDomain
+    suspend fun fetchBooks(): BooksDomain
 
     class Base(
         private val booksRepository: BooksRepository,
