@@ -1,4 +1,4 @@
 package com.stebakov.holybible.core
 
-class Book(val id: Int, val name: String) {
+data class Book(val id: Int, val name: String) {
 }
