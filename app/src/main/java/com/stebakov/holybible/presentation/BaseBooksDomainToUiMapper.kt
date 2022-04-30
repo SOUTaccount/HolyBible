@@ -1,15 +1,15 @@
 package com.stebakov.holybible.presentation
 
-import com.stebakov.holybible.core.Book
+import com.stebakov.holybible.domain.BookDomain
+import com.stebakov.holybible.domain.BookDomainToUiMapper
 import com.stebakov.holybible.domain.BooksDomainToUiMapper
 import com.stebakov.holybible.domain.ErrorType
 
 class BaseBooksDomainToUiMapper(
-    private val communication: BooksCommunication,
-    private val resourceProvider: ResourceProvider
+    private val resourceProvider: ResourceProvider,
+    private val bookMapper: BookDomainToUiMapper
 ) :
     BooksDomainToUiMapper {
-    override fun map(books: List<Book>) = BooksUi.Success(communication, books)
-    override fun map(errorType: ErrorType) =
-        BooksUi.Fail(communication, errorType, resourceProvider)
+    override fun map(books: List<BookDomain>) = BooksUi.Success(books, bookMapper)
+    override fun map(errorType: ErrorType) = BooksUi.Fail(errorType, resourceProvider)
 }

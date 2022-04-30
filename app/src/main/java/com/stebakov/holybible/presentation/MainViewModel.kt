@@ -4,8 +4,6 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.stebakov.holybible.core.Abstract
-import com.stebakov.holybible.core.Book
 import com.stebakov.holybible.domain.BooksDomainToUiMapper
 import com.stebakov.holybible.domain.BooksInteractor
 import kotlinx.coroutines.Dispatchers
@@ -18,15 +16,18 @@ class MainViewModel(
     private val communication: BooksCommunication
 ) : ViewModel() {
 
-    fun fetchBooks() = viewModelScope.launch(Dispatchers.IO) {
-        val resultDomain = booksInteractor.fetchBooks()
-        withContext(Dispatchers.Main) {
+    fun fetchBooks() {
+        communication.map(listOf(BookUi.Progress))
+        viewModelScope.launch(Dispatchers.IO) {
+            val resultDomain = booksInteractor.fetchBooks()
             val resultUi = resultDomain.map(mapper)
-            resultUi.map(Abstract.Mapper.Empty())
+            withContext(Dispatchers.Main) {
+                resultUi.map(communication)
+            }
         }
     }
 
-    fun observer(owner: LifecycleOwner, observer: Observer<List<Book>>) {
-        communication.observeSuccess(owner, observer)
+    fun observer(owner: LifecycleOwner, observer: Observer<List<BookUi>>) {
+        communication.observe(owner, observer)
     }
 }
