@@ -1,14 +1,20 @@
 package com.stebakov.holybible.data.cache
 
-import com.stebakov.holybible.core.Book
+import com.stebakov.holybible.data.BookData
+import com.stebakov.holybible.data.BookDataToDbMapper
+
 
 interface BooksCacheDataSource {
 
     fun fetchBooks(): List<BookDb>
 
-    fun saveBooks(books: List<Book>)
+    fun saveBooks(books: List<BookData>)
 
-    class Base(private val realmProvider: RealmProvider) : BooksCacheDataSource {
+    class Base(
+        private val realmProvider: RealmProvider,
+        private val mapper: BookDataToDbMapper
+    ) : BooksCacheDataSource {
+
         override fun fetchBooks(): List<BookDb> {
             realmProvider.provide().use { realm ->
                 val booksDb = realm.where(BookDb::class.java).findAll() ?: emptyList()
@@ -16,11 +22,10 @@ interface BooksCacheDataSource {
             }
         }
 
-        override fun saveBooks(books: List<Book>) = realmProvider.provide().use { realm ->
+        override fun saveBooks(books: List<BookData>) = realmProvider.provide().use { realm ->
             realm.executeTransaction {
                 books.forEach { book ->
-                    val bookDb = it.createObject(BookDb::class.java, book.id)
-                    bookDb.name = book.name
+                    book.mapTo(mapper, it)
                 }
             }
         }
