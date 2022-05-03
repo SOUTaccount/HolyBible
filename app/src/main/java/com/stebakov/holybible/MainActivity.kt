@@ -2,6 +2,7 @@ package com.stebakov.holybible
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.stebakov.holybible.core.BibleApp
 import com.stebakov.holybible.presentation.BibleAdapter
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
         recyclerView.adapter = adapter
+        recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         viewModel.observer(this) {
             adapter.update(it)
         }
