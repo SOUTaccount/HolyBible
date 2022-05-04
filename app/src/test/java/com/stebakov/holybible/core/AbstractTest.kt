@@ -10,7 +10,8 @@ class AbstractTest {
     fun test_success() {
         val dataObject = TestDataObject.Success("a", "b")
         val domainObject = dataObject.map(DataMapper.Base())
-        assertTrue(domainObject is DomainObject.Success)
+        val expected = DomainObject.Success("a b")
+        assertEquals(expected, domainObject)
     }
 
     @Test
