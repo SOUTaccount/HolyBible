@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.stebakov.holybible.core.CustomTextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/textView"
     style="@style/TextAppearance.AppCompat.Body1"
@@ -8,4 +8,4 @@
     android:padding="@dimen/padding8"
     tools:text="Genesis">
 
-</TextView>
+</com.stebakov.holybible.core.CustomTextView>
