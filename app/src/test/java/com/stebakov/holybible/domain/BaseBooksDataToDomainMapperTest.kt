@@ -1,7 +1,12 @@
 package com.stebakov.holybible.domain
 
-import com.stebakov.holybible.data.BookData
-import com.stebakov.holybible.data.BookDataToDomainMapper
+import com.stebakov.holybible.core.ErrorType
+import com.stebakov.holybible.data.books.BookData
+import com.stebakov.holybible.data.books.BookDataToDomainMapper
+import com.stebakov.holybible.domain.books.BaseBooksDataToDomainMapper
+import com.stebakov.holybible.domain.books.BookDomain
+import com.stebakov.holybible.domain.books.BooksDomain
+import com.stebakov.holybible.domain.books.TestamentType
 import org.junit.Assert.*
 import org.junit.Test
 import java.lang.IllegalStateException
