@@ -1,8 +1,12 @@
 package com.stebakov.holybible.presentation
 
 import com.stebakov.holybible.R
-import com.stebakov.holybible.domain.BookDomainToUiMapper
-import com.stebakov.holybible.domain.ErrorType
+import com.stebakov.holybible.domain.books.BookDomainToUiMapper
+import com.stebakov.holybible.core.ErrorType
+import com.stebakov.holybible.core.ResourceProvider
+import com.stebakov.holybible.presentation.books.BaseBooksDomainToUiMapper
+import com.stebakov.holybible.presentation.books.BookUi
+import com.stebakov.holybible.presentation.books.BooksUi
 import org.junit.Assert.*
 import org.junit.Test
 import java.lang.IllegalStateException

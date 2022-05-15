@@ -1,8 +1,10 @@
 package com.stebakov.holybible.presentation
 
+import com.stebakov.holybible.presentation.books.BookUi
+import com.stebakov.holybible.presentation.books.CollapsedIdsCache
+import com.stebakov.holybible.presentation.books.UiDataCache
 import org.junit.Assert.*
 import org.junit.Test
-import kotlin.math.exp
 
 /**
  * Test for [UiDataCache.Base]
@@ -21,7 +23,7 @@ class UiDataCacheTest {
 
     @Test
     fun test_collapse_first() {
-        val dataCache = UiDataCache.Base(IdCache.Empty())
+        val dataCache = UiDataCache.Base(CollapsedIdsCache.Empty())
         dataCache.cache(source)
 
         val actual = dataCache.changeState(-1)
@@ -36,7 +38,7 @@ class UiDataCacheTest {
 
     @Test
     fun test_collapse_second() {
-        val dataCache = UiDataCache.Base(IdCache.Empty())
+        val dataCache = UiDataCache.Base(CollapsedIdsCache.Empty())
         dataCache.cache(source)
 
         val actual = dataCache.changeState(0)
@@ -51,7 +53,7 @@ class UiDataCacheTest {
 
     @Test
     fun test_collapse_first_then_expand() {
-        val dataCache = UiDataCache.Base(IdCache.Empty())
+        val dataCache = UiDataCache.Base(CollapsedIdsCache.Empty())
         dataCache.cache(source)
 
         var actual = dataCache.changeState(-1)
@@ -70,7 +72,7 @@ class UiDataCacheTest {
 
     @Test
     fun test_collapse_second_then_expand() {
-        val dataCache = UiDataCache.Base(IdCache.Empty())
+        val dataCache = UiDataCache.Base(CollapsedIdsCache.Empty())
         dataCache.cache(source)
 
         var actual = dataCache.changeState(0)
@@ -89,7 +91,7 @@ class UiDataCacheTest {
 
     @Test
     fun test_collapse_first_collapse_second() {
-        val dataCache = UiDataCache.Base(IdCache.Empty())
+        val dataCache = UiDataCache.Base(CollapsedIdsCache.Empty())
         dataCache.cache(source)
 
         var actual = dataCache.changeState(-1)
@@ -111,7 +113,7 @@ class UiDataCacheTest {
 
     @Test
     fun test_collapse_first_collapse_second_expand_first() {
-        val dataCache = UiDataCache.Base(IdCache.Empty())
+        val dataCache = UiDataCache.Base(CollapsedIdsCache.Empty())
         dataCache.cache(source)
 
         var actual = dataCache.changeState(-1)
@@ -142,7 +144,7 @@ class UiDataCacheTest {
 
     @Test
     fun test_collapse_first_collapse_second_expand_second() {
-        val dataCache = UiDataCache.Base(IdCache.Empty())
+        val dataCache = UiDataCache.Base(CollapsedIdsCache.Empty())
         dataCache.cache(source)
 
         var actual = dataCache.changeState(-1)
